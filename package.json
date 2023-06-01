@@ -1,0 +1,36 @@
+{
+	"name": "conexionviajera",
+	"version": "1.0.0",
+	"description": "Empresa de Publicidad Turística en el Municipios Juan German Roscio en San Juan de los Morros",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"api": "nodemon index.js --ignore client/**",
+		"client": "cd client && npm run dev",
+		"server-install": "npm install",
+		"client-install": "cd client && npm install",
+		"install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
+		"dev": "concurrently \"npm run api\" \"npm run client\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GGene29/ConexionViajera.git"
+	},
+	"author": "Génesis Sumoza, Jonaiker Jaspes, Keving Andrades",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/GGene29/ConexionViajera/issues"
+	},
+	"homepage": "https://github.com/GGene29/ConexionViajera#readme",
+	"dependencies": {
+		"axios": "^1.4.0",
+		"concurrently": "^8.0.1",
+		"dotenv": "^16.1.0",
+		"express": "^4.18.2",
+		"mongoose": "^7.2.2",
+		"morgan": "^1.10.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.22"
+	}
+}
