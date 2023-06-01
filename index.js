@@ -4,6 +4,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const reviewRouter = require('./routes/reviewRouter');
+const path = require("path");
 
 const app = express();
 
@@ -21,6 +22,13 @@ mongoose.connect(URI);
 mongoose.connection.on('error', err => {
 	console.error(err.message);
 });
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static("client/dist"));
+	app.get("*", (req, res) => {
+		res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+	});
+};
 
 //ROUTES
 app.use('/api', reviewRouter);
