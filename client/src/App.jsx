@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider, useLocation, useOutlet } from 'rea
 import { DataProvider } from './GlobalState';
 import Home from './components/mainpages/home/Home';
 import NotFound from './components/mainpages/utils/not_found/NotFound';
-import Header from './components/header/header';
+import Header from './components/header/Header';
 import About from './components/mainpages/about/About';
 import Sites from './components/mainpages/sites/Sites';
 import Reviews from './components/mainpages/reviews/Reviews';
