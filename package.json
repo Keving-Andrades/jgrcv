@@ -11,7 +11,7 @@
 		"client-install": "cd client && npm install",
 		"install-all": "concurrently \"npm run server-install\" \"npm run client-install\"",
 		"dev": "concurrently \"npm run api\" \"npm run client\"",
-		"render-postbuild": "cd client && npm install && npm run build"
+		"render-build": "npm install && cd client && npm install && npm run build"
 	},
 	"repository": {
 		"type": "git",
