@@ -9,7 +9,7 @@ export const DataProvider = ({ children }) => {
 	const getReviews = async () => {
 		const { data: { status, success, content } } = await axios.get("/api/reviews");
 
-		console.log(content);
+		console.log({ status, success, content });
 		if (success) setReviews([...reviews, ...content]);
 	};
 
