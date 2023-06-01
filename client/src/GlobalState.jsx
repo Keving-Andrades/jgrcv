@@ -7,9 +7,10 @@ export const DataProvider = ({ children }) => {
 	const [ reviews, setReviews ] = useState([]);
 
 	const getReviews = async () => {
-		const { data: { status, success, content } } = await axios.get("/api/reviews");
-
-		console.log({ status, success, content });
+		const res = await axios.get("/api/reviews");
+		const content = res.data.content;
+		
+		console.log(res);
 		if (success) setReviews([...reviews, ...content]);
 	};
 
