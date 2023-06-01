@@ -18,7 +18,17 @@ app.use(morgan('dev'));
 // CONNECT TO MONGODB
 const URI = process.env.DATABASE;
 
-mongoose.connect(URI);
+const connectMongo = async () => {
+	try {
+		await mongoose.connect(URI);
+		console.log("Connected to database.");
+	} catch (err) {
+		console.error(err);
+	};
+};
+
+connectMongo();
+
 mongoose.connection.on('error', err => {
 	console.error(err.message);
 });

@@ -6,11 +6,16 @@ const reviewCtrl = {
 		try {
 			const reviews = await Review.find();
 
-			if (reviews.length < 1) return res.status(400).json({
-				status: 400,
-				success: false,
-				content: "No reviews available."
-			});
+			if (reviews.length < 1) {
+				const error = {
+					status: 400,
+					success: false,
+					content: "No reviews available."
+				};
+
+				console.error(error);
+				return res.status(400).json(error);
+			};
 
 			return res.json({
 				status: 200,
@@ -19,49 +24,76 @@ const reviewCtrl = {
 			});
 		} catch (err) {
 			const { message } = err;
-
-			return res.status(500).json({
+			const error = {
 				status: 500,
 				success: false,
 				content: message
-			});
+			};
+
+			console.error(error);
+			return res.status(500).json(error);
 		};
 	},
 	createReview: async (req, res) => {
 		try {
 			const { body: { name, review }, socket: { remoteAddress: ip } } = req;
 
-			if (!name) return res.status(400).json({
-				status: 400,
-				success: false,
-				content: "Name value required."
-			});
+			if (!name) {
+				const error = {
+					status: 400,
+					success: false,
+					content: "Name value required."
+				};
 
-			if (name.length > 20) return res.status(400).json({
-				status: 400,
-				success: false,
-				content: "Name length must be less than or equal to 20."
-			});
+				console.error(error);
+				return res.status(400).json(error);
+			}
 
-			if (!review) return res.status(400).json({
-				status: 400,
-				success: false,
-				content: "Review value required."
-			});
+			if (name.length > 20) {
+				const error = {
+					status: 400,
+					success: false,
+					content: "Name length must be less than or equal to 20."
+				};
+
+				console.error(error);
+				return res.status(400).json(error);
+			};
+
+			if (!review) {
+				const error = {
+					status: 400,
+					success: false,
+					content: "Review value required."
+				};
+
+				console.error(error);
+				return res.status(400).json(error);
+			};
 			
-			if (review.length > 295) return res.status(400).json({
-				status: 400,
-				success: false,
-				content: "Review length must be less than or equal to 295."
-			});
+			if (review.length > 295) {
+				const error = {
+					status: 400,
+					success: false,
+					content: "Review length must be less than or equal to 295."
+				};
+
+				console.error(error);
+				return res.status(400).json(error);
+			};
 
 			const { status, country, regionName } = await axios.get(`http://ip-api.com/json/${ip}?fields=status,country,regionName&lang=es`);
 
-			if (status !== "success") return res.status(400).json({
-				status: 400,
-				success: false,
-				content: "Could not find address."
-		 	});
+			if (status !== "success") {
+				const error = {
+					status: 400,
+					success: false,
+					content: "Could not find address."
+				};
+
+				console.error(error);
+				return res.status(400).json(error);
+			};
 
 			const reviewData = {
 				name,
@@ -80,12 +112,14 @@ const reviewCtrl = {
 			});
 		} catch (err) {
 			const { message } = err;
-
-			return res.status(500).json({
+			const error = {
 				status: 500,
 				success: false,
 				content: message
-			});
+			};
+
+			console.error(error);
+			return res.status(500).json(error);
 		};
 	}
 };
