@@ -9,7 +9,7 @@ const path = require("path");
 const app = express();
 
 // SETTINGS
-const PORT = process.env.PORT || 8080;
+const { PORT = 8080 } = process.env;
 
 // MIDDLEWARES
 app.use(express.json());
