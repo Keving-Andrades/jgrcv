@@ -32,6 +32,8 @@ const Reviews = () => {
 		setReviewData({...reviewData, [name]: value});
 	};
 
+	console.log(reviews);
+
 	return (
 		<>
 			<div className='list'>
