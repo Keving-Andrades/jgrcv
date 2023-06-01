@@ -31,6 +31,30 @@ const reviewCtrl = {
 		try {
 			const { body: { name, review }, socket: { remoteAddress: ip } } = req;
 
+			if (!name) return res.status(400).json({
+				status: 400,
+				success: false,
+				content: "Name value required."
+			});
+
+			if (name.length > 20) return res.status(400).json({
+				status: 400,
+				success: false,
+				content: "Name length must be less than or equal to 20."
+			});
+
+			if (!review) return res.status(400).json({
+				status: 400,
+				success: false,
+				content: "Review value required."
+			});
+			
+			if (review.length > 295) return res.status(400).json({
+				status: 400,
+				success: false,
+				content: "Review length must be less than or equal to 295."
+			});
+
 			const { status, country, regionName } = await axios.get(`http://ip-api.com/json/${ip}?fields=status,country,regionName&lang=es`);
 
 			if (status !== "success") return res.status(400).json({
@@ -39,18 +63,20 @@ const reviewCtrl = {
 				content: "Could not find address."
 		 	});
 
-			const newReview = new Review({
+			const reviewData = {
 				name,
 				location: `${regionName}, ${country}`,
 				review
-			});
+			};
+
+			const newReview = new Review({ ...reviewData });
 			
 			await newReview.save();
 
 			return res.json({
 				status: 200,
 				success: true,
-				content: "Review submitted successfully."
+				content: reviewData
 			});
 		} catch (err) {
 			const { message } = err;
