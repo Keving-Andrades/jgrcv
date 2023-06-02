@@ -37,7 +37,7 @@
 }
 
 h2 {
-	width: 350px;
+	width: 400px;
 	font-size: 40px;
 	font-weight: 900;
 	text-align: center;
@@ -88,7 +88,7 @@ header > nav > div {
 	height: 100%;
 	font-weight: 900;
 	text-transform: uppercase;
-	font-size: 20px;
+	font-size: 18px;
 	color: var(--white);
 	cursor: pointer;
 }
@@ -113,7 +113,7 @@ header > nav > div > span.active::after {
 }
 
 main {
-	padding: 6em 14em;
+	padding: 6em 14em 3.5em;
 	height: 100vh;
 }
 
@@ -132,18 +132,11 @@ main.reviews > .list {
 	align-items: center;
 	justify-content: flex-start;
 	position: relative;
-	margin-bottom: 12em;
-	gap: 2em;
+	width: 100%;
 }
 
-main.reviews > .list::after {
-	content: "";
-	position: absolute;
-	top: 250%;
-	width: 120%;
-	height: 1px;
-	background-color: var(--grey);
-	opacity: 10%;
+main.reviews > .list > .review:not(:first-child) {
+	margin-top: 2em;
 }
 
 main.reviews > .list > .review {
@@ -176,9 +169,28 @@ main.reviews > .list > .review > .review__userData > span:last-child {
 }
 
 main.reviews > .list > .review > .review__content {
+	width: 100%;
 	font-style: italic;
 	font-weight: 400;
 	letter-spacing: 0;
+}
+
+main.reviews > .list > .empty {
+	margin-bottom: .5em;
+	font-size: 25px;
+	font-weight: 700;
+	color: var(--grey);
+	opacity: 25%;
+	letter-spacing: 0;
+}
+
+
+main.reviews > .list > .separator {
+	margin: 5em 0;
+	width: 120%;
+	height: 1px;
+	background-color: var(--grey);
+	opacity: 10%;
 }
 
 main.reviews > .form {
@@ -186,6 +198,7 @@ main.reviews > .form {
 	flex-direction: column;
 	align-items: center;
 	justify-content: flex-start;
+	margin-top: 3em;
 	width: 100%;
 	gap: 2em;
 }
@@ -205,15 +218,16 @@ main.reviews > .form > form {
 
 main.reviews > .form > form > div {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: flex-start;
 	width: 100%;
 	gap: 2em
 }
 
 main.reviews > .form > form > div > label {
-	color: var(--grey);
+	padding: 1em 0;
 	font-weight: 600;
+	color: var(--grey);
 }
 
 main.reviews > .form > form > div > input,

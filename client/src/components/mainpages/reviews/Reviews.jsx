@@ -37,21 +37,29 @@ const Reviews = () => {
 			<div className='list'>
 				{
 					reviews.length > 0 ?
-						reviews.map(({ name, location, review }, ind) =>
-							<div className="review" key={ind}>
-								<div className="review__userData">
-									<span> { name } </span>
-									<span> { location } </span>
-								</div>
-								<span className='review__content'> { review } </span>
-							</div>
-						)
+						<>
+							{
+								reviews.map(({ name, location, review }, ind) =>
+									<div className="review" key={ind}>
+										<div className="review__userData">
+											<span> {name} </span>
+											<span> {location} </span>
+										</div>
+										<span className='review__content'> {review} </span>
+									</div>
+								)
+							}
+							<div className="separator"></div>
+							<h2>¡Escribe tu <span className='green'>reseña</span> aquí!</h2>
+						</>
 					:
-						<div className="empty">No hay reseñas aun :(</div>
+						<>
+							<div className="empty">Aun no hay reseñas :(</div>
+							<h2>¡Se el primero en <span className='green'>escribir una</span>!</h2>
+						</>
 				}
 			</div>
 			<div className="form">
-				<h2>¡Escribe tu <span className='green'>reseña</span> aquí!</h2>
 				<form onSubmit={reviewSubmit} autoComplete="off">
 					<div>
 						<label htmlFor="name">Nombre</label>
