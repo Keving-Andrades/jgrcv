@@ -17,6 +17,8 @@ const reviewCtrl = {
 				return res.status(400).json(error);
 			};
 
+			console.log(reviews);
+
 			return res.json({
 				status: 200,
 				success: true,
@@ -37,6 +39,8 @@ const reviewCtrl = {
 	createReview: async (req, res) => {
 		try {
 			const { body: { name, review }, socket: { remoteAddress: ip } } = req;
+
+			console.log(req);
 
 			if (!name) {
 				const error = {
