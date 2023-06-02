@@ -6,6 +6,8 @@ const reviewCtrl = {
 		try {
 			const reviews = await Review.find();
 
+			console.log(reviews);
+
 			if (reviews.length < 1) {
 				const error = {
 					status: 400,
@@ -16,8 +18,6 @@ const reviewCtrl = {
 				console.error(error);
 				return res.status(400).json(error);
 			};
-
-			console.log(reviews);
 
 			return res.json({
 				status: 200,
@@ -85,10 +85,9 @@ const reviewCtrl = {
 			};
 
 			const ip = req.headers['true-client-ip'];
-			console.log(ip);
-			const { status, country, regionName } = await axios.get(`http://ip-api.com/json/${ip}?fields=status,country,regionName&lang=es`);
+			const { data: { status, country, regionName } } = await axios.get(`http://ip-api.com/json/${ip}?fields=status,country,regionName&lang=es`);
 
-			if (status !== "success") {
+			if (status !== 'success') {
 				const error = {
 					status: 400,
 					success: false,
