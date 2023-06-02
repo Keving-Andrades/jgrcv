@@ -6,8 +6,6 @@ const reviewCtrl = {
 		try {
 			const reviews = await Review.find();
 
-			console.log(reviews);
-
 			if (reviews.length < 1) {
 				const error = {
 					status: 400,
