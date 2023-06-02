@@ -4,10 +4,6 @@ import ReviewsAPI from './api/ReviewsAPI';
 export const GlobalState = createContext();
 
 export const DataProvider = ({ children }) => {
-	useEffect(() => {
-		getReviews();
-	}, []);
-
 	const state = {
 		reviewsAPI: ReviewsAPI()
 	};
