@@ -7,9 +7,16 @@ export const DataProvider = ({ children }) => {
 	const [ reviews, setReviews ] = useState([]);
 
 	const getReviews = async () => {
-		const { data: { status, success, content } } = await axios.get("/api/reviews");
-		
-		if (success) setReviews([...reviews, ...content]);
+		try {
+			const res = await axios.get("/api/reviews");
+			const { data: { status, success, content } } = res
+			
+			if (success) setReviews([...reviews, ...content]);
+		} catch (err) {
+			const { message } = err;
+
+			console.log(message);
+		};
 	};
 
 	useEffect(() => {

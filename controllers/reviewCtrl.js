@@ -38,9 +38,7 @@ const reviewCtrl = {
 	},
 	createReview: async (req, res) => {
 		try {
-			const { body: { name, review }, socket: { remoteAddress: ip } } = req;
-
-			console.log(req);
+			const { body: { name, review } } = req;
 
 			if (!name) {
 				const error = {
@@ -85,6 +83,8 @@ const reviewCtrl = {
 				console.error(error);
 				return res.status(400).json(error);
 			};
+
+			const ip = req.headers['true-client-ip'];
 
 			const { status, country, regionName } = await axios.get(`http://ip-api.com/json/${ip}?fields=status,country,regionName&lang=es`);
 
