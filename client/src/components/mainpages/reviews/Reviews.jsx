@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const Reviews = () => {
 	const state = useContext(GlobalState);
-	const { reviews: reviewTools } = state;
-	const [ reviews, setReviews ] = reviewTools;
+	const { reviewsAPI } = state;
+	const [ reviews, setReviews ] = reviewsAPI.reviews;
 	const [ reviewData, setReviewData ] = useState({name: "", review: ""});
 	const [ formStatus, setFormStatus ] = useState(null);
 

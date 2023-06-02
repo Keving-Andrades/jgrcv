@@ -85,7 +85,7 @@ const reviewCtrl = {
 			};
 
 			const ip = req.headers['true-client-ip'];
-
+			console.log(ip);
 			const { status, country, regionName } = await axios.get(`http://ip-api.com/json/${ip}?fields=status,country,regionName&lang=es`);
 
 			if (status !== "success") {
