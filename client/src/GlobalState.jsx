@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext } from 'react';
 import ReviewsAPI from './api/ReviewsAPI';
 
 export const GlobalState = createContext();

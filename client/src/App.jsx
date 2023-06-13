@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { createBrowserRouter, RouterProvider, useLocation, useOutlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { createBrowserRouter, RouterProvider, useLocation, Outlet } from 'react-router-dom';
 import { DataProvider } from './GlobalState';
 import Home from './components/mainpages/home/Home';
 import NotFound from './components/mainpages/utils/not_found/NotFound';
@@ -7,28 +7,41 @@ import Header from './components/header/Header';
 import About from './components/mainpages/about/About';
 import Sites from './components/mainpages/sites/Sites';
 import Reviews from './components/mainpages/reviews/Reviews';
+import Footer from './components/footer/Footer';
 
-const Outlet = () => {
-	const [ outlet ] = useState(useOutlet());
+const ScrollToTop = ({ children }) => {
+	const location = useLocation();
+	useEffect(() => {
+		window.scrollTo({
+			top: 0,
+			behavior: "instant"
+		});
+	}, [location]);
 
-	return (
-		<>
-			{ outlet }
-		</>
-	);
+	return <>
+		{ children }
+	</>;
 };
 
 const AppLayout = () => {
 	const location = useLocation();
 	const { pathname } = location;
 	const page = pathname === "/" ? "home" : pathname.replace("/", "");
+	const [ color, setColor ] = useState({
+		backgroundColor: "transparent",
+		color: "var(--white)",
+		activeColor: "var(--primary-color)"
+	});
 
 	return (
 		<DataProvider>
-			<Header />
-			<main className={page}>
-				<Outlet key={location.pathname} />
-			</main>
+			<ScrollToTop>
+				<Header headerHandler = { [ color, setColor ] } />
+				<main className={page}>
+					<Outlet key={location.pathname} context={[ color, setColor ]} />
+				</main>
+				<Footer />
+			</ScrollToTop>
 		</DataProvider>
 	);
 };
