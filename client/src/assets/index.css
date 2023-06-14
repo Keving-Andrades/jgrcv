@@ -447,6 +447,7 @@ main.about > .founders > .founders__list > .founders__list--info > .info__title 
 main.about > .founders > .founders__list > .founders__list--info > .info__text {
     width: 42vw;
     font-size: 1.18vw;
+	text-align: justify;
 	white-space: pre-line;
     line-height: 1.5vw;
     letter-spacing: 0;
@@ -458,7 +459,6 @@ main.sites {
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 9vw;
-	padding-top: 6vw;
 }
 
 main.sites > .popular {
@@ -665,7 +665,6 @@ main.reviews {
 	align-items: center;
 	justify-content: flex-start;
 	padding: 0 14em;
-	padding-top: 6vw;
 	width: 100%;
 	height: 100%;
 }
