@@ -86,7 +86,7 @@ const Reviews = () => {
 							name = 'review'
 							id = 'review'
 							placeholder='Escribe tu reseña aquí'
-							value = { reviewData.content }
+							value = { reviewData.review }
 							maxLength = { 295 }
 							required
 							onChange = { onChangeInput }
