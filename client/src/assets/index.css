@@ -786,7 +786,7 @@ main.reviews > .form > form > div {
 }
 
 main.reviews > .form > form > div > label {
-	padding: 2vw 0;
+	padding: 1vw 0;
 	font-weight: 600;
 	color: var(--grey);
 }
@@ -796,18 +796,21 @@ main.reviews > .form > form > div > textarea  {
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
-	padding: 2vw 3vw;
+	padding: 1vw 3vw;
 	width: 100%;
 	font-family: inherit;
+	font-size: inherit;
+	letter-spacing: 1px;
 	outline: unset;
 	text-align: start;
 	border: 1px solid var(--grey);
 	border-radius: 20px;
+	color: var(--grey);
 	background-color: white;
 }
 
 main.reviews > .form > form > div > textarea {
-	height: 95px;
+	height: 10vw;
 }
 
 main.reviews > .form > form > button {
@@ -824,7 +827,20 @@ main.reviews > .form > form > button {
 	background: linear-gradient(to right, var(--primary-color) 50%, rgba(255, 255, 255, 0.260) 100%);
 	background-color: var(--primary-color);
 	border-radius: 30px;
+	border: 2px solid transparent;
 	cursor: pointer;
+}
+
+main.reviews > .form > form > button.touched {
+	border: 2px solid var(--grey);
+}
+
+main.reviews > .form > form.error > button.touched {
+	border: 2px solid var(--error);
+}
+
+main.reviews > .form > form.success > button.touched {
+	border: 2px solid transparent;
 }
 
 footer {
@@ -1265,6 +1281,15 @@ footer > .footer__bottom > .footer__bottom--email > span {
 
 	main.reviews > .form > form > div {
 		flex-direction: column;
+	}
+
+	main.reviews > .form > form > div > input,
+	main.reviews > .form > form > div > textarea {
+		padding: 2vw 5vw;
+	}
+
+	main.reviews > .form > form > div > textarea {
+		height: 30vw;
 	}
 
 	footer {

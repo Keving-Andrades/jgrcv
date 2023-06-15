@@ -12,13 +12,19 @@ const Reviews = () => {
 	const reviewSubmit = async e => {
 		e.preventDefault();
 
+		const formRef = e.currentTarget;
+
 		try {
 			const { name, review } = reviewData;
 			const { data: { status, success, content } } = await axios.post("/api/reviews", {name: name.trim(), review: review.trim()});
 
+			formRef.classList.add("success");
+			setReviewData(value => ({name: "", review: ""}));
 			return setReviews([...reviews, content]);
 		} catch (err) {
 			const { response: { data: { status, success, content } } } = err;
+
+			formRef.classList.add("error");
 			if (!success) return setFormStatus({
 				status,
 				success,
@@ -92,7 +98,7 @@ const Reviews = () => {
 						:
 							null
 					}
-					<button type='submit'>Enviar</button>
+					<button type='submit' onClick={e => e.currentTarget.classList.add("touched")}>Enviar</button>
 				</form>
 			</div>
 		</>
