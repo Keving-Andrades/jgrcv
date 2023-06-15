@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { createBrowserRouter, RouterProvider, useLocation, Outlet } from 'react-router-dom';
 import { DataProvider } from './GlobalState';
 import Home from './components/mainpages/home/Home';
@@ -27,6 +27,7 @@ const AppLayout = () => {
 	const location = useLocation();
 	const { pathname } = location;
 	const page = pathname === "/" ? "home" : pathname.replace("/", "");
+	const headerRef = useRef(null);
 	const [ color, setColor ] = useState({
 		backgroundColor: "transparent",
 		color: "var(--white)",
@@ -36,9 +37,9 @@ const AppLayout = () => {
 	return (
 		<DataProvider>
 			<ScrollToTop>
-				<Header headerHandler = { [ color, setColor ] } />
+				<Header ref = { headerRef } headerHandler = { [ color, setColor ] } />
 				<main className={page}>
-					<Outlet key={location.pathname} context={[ color, setColor ]} />
+					<Outlet key={location.pathname} context={[ color, setColor, headerRef ]} />
 				</main>
 				<Footer />
 			</ScrollToTop>

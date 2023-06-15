@@ -1,20 +1,40 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion as m, useAnimate, stagger, useInView } from 'framer-motion';
 import { ReactComponent as Logo } from '../../../assets/utils/logo.svg'
 import valuesImg from '../../../assets/photos/2.jpg'
 import { useOutletContext } from 'react-router-dom';
 
 const About = () => {
-	const [ color, setColor ] = useOutletContext();
+	const [ color, setColor, headerRef ] = useOutletContext();
 	const [ scope, animate ] = useAnimate();
 	const isInView = useInView(scope, { once: true, amount: .7 });
+	const [ isOverlapping, setIsOverlapping ] = useState(false);
 	const valuesSectionRef = useRef(null);
-	const valuesSectionIsInView = useInView(valuesSectionRef, { amount: .715, margin: "72% 0px 0px 0px" })
 	const staggerValues = stagger(0.05);
+	
+
+	const checkIfHeaderIsOverlapping = () => {
+		if (headerRef.current && valuesSectionRef.current) {
+			const a = headerRef.current.getBoundingClientRect();
+			const b = valuesSectionRef.current.getBoundingClientRect();
+
+			if (a.height <= b.top + b.height && a.top + a.height > b.top) {
+				setIsOverlapping(true);
+			} else {
+				setIsOverlapping(false);
+			};
+		};
+	};
+
 
 	useEffect(() => {
+		const checkOverlaping = () => {
+			window.addEventListener("scroll", checkIfHeaderIsOverlapping);
+		};
+		checkOverlaping();
+
 		setColor(color =>
-			valuesSectionIsInView ?
+			isOverlapping ?
 				{
 					backgroundColor: "var(--primary-color)",
 					color: "var(--grey)",
@@ -64,7 +84,11 @@ const About = () => {
 				delay: staggerValues
 			}
 		);
-	}, [isInView, valuesSectionIsInView]);
+
+		return () => {
+			window.removeEventListener("scroll", checkIfHeaderIsOverlapping);
+		};
+	}, [isInView, isOverlapping]);
 
 	return (
 		<>

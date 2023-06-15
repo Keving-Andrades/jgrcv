@@ -11,9 +11,23 @@ import termales from '../../../assets/photos/8.jpg';
 import olimpica from '../../../assets/photos/4.jpg';
 import sanJuanote from '../../../assets/photos/11.jpeg';
 import cultura from '../../../assets/photos/6.jpg';
+import { useScrollLock } from '../utils/scroll_lock/useScrollLock';
 
 const SiteCard = ({ img, name, description }) => {
 	const [ expanded, setExpanded ] = useState(false);
+	const { lockScroll, unlockScroll } = useScrollLock();
+
+	const toggleCard = () => {
+		if (!expanded) {
+			lockScroll();
+			return setExpanded(value => !value);
+		};
+
+		if (expanded) {
+			unlockScroll();
+			return setExpanded(value => !value);
+		};
+	};
 
 	return (
 		<>
@@ -21,7 +35,7 @@ const SiteCard = ({ img, name, description }) => {
 				!expanded ?
 					<m.div 
 						className='site__card'
-						onClick={() => setExpanded(!expanded)}
+						onClick={ toggleCard }
 						layoutId={`${name}_card`}
 						whileHover={{
 							scale: 1.2,
@@ -72,7 +86,7 @@ const SiteCard = ({ img, name, description }) => {
 				:
 					<div 
 						className='bg-block'
-						onClick={() => setExpanded(expanded => !expanded)}
+						onClick={ toggleCard }
 					>
 						<m.div
 							className='site__card expanded'
@@ -86,7 +100,7 @@ const SiteCard = ({ img, name, description }) => {
 								stiffness: 200
 							}}
 						>
-							<div className="card__close" onClick={() => setExpanded(expanded => !expanded)}>
+							<div className="card__close" onClick={ toggleCard }>
 								<FontAwesomeIcon icon = { icon({ name: 'xmark', style: 'solid' }) } />	
 							</div>
 							<m.div
